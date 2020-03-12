@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.coderaavana.inhouse" 
+version="1.0.0" 
+xmlns="http://www.w3.org/ns/widgets" 
+xmlns:cdv="http://cordova.apache.org/ns/1.0"
+xmlns:android="http://schemas.android.com/apk/res/android">
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
+    <feature name="Globalization">
+        <param name="android-package" value="org.apache.cordova.globalization.Globalization" />
+    </feature>
+    <feature name="Media">
+        <param name="android-package" value="org.apache.cordova.media.AudioHandler" />
+    </feature>
+    <feature name="Capture">
+        <param name="android-package" value="org.apache.cordova.mediacapture.Capture" />
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Device">
+        <param name="android-package" value="org.apache.cordova.device.Device" />
+    </feature>
+    <feature name="BarcodeScanner">
+        <param name="android-package" value="com.phonegap.plugins.barcodescanner.BarcodeScanner" />
+    </feature>
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
+    <name>InHouse</name>
+    <description>
+        Accounting App for InHouse
+    </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">
+        InHouse App
+    </author>
+    
+    <preference name="android-minSdkVersion" value="20" />
+    <preference name="android-minSdkVersion" value="28" />
+    <plugin name="cordova-plugin-geolocation" source="npm" spec="~2.4.3" />
+    <plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~8.1.0" />
+    <plugin name="cordova-plugin-device" source="npm" spec="~2.0.3" />    
+
+    <preference name="phonegap-version" value="cli-9.0.0" />
+    <content src="index.html" />
+    <access origin="*" />
+    <plugin name="cordova-plugin-whitelist" spec="1" />
+    <plugin name="cordova-plugin-camera" spec="4.1.0" />
+    <plugin name="cordova-plugin-dialogs" spec="2.0.2" />
+    <plugin name="cordova-plugin-file" spec="6.0.2" />
+    <plugin name="cordova-plugin-file-transfer" spec="1.7.1" />
+    <plugin name="cordova-plugin-globalization" spec="1.11.0" />
+    <plugin name="cordova-plugin-media" spec="5.0.3" />
+    <plugin name="cordova-plugin-media-capture" spec="3.0.3" />
+    <plugin name="cordova-plugin-network-information" spec="2.0.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="5.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="2.4.3" />   
+    <plugin name="cordova-plugin-x-toast" source="npm" />
+    
+    <platform name="android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
+    </platform>
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <allow-intent href="market:*" />
+    <preference name="loglevel" value="DEBUG" />
+    <platform name="android">
+        <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
+        <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    </platform>
+</widget>

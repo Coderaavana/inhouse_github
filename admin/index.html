@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/my.min.css">
+    <script src="../cordova.js"></script> 
+    
+    <title>Inhouse Medicare</title>    
+    
+</head>
+<body onload="init()">
+  
+<div class="tt">
+  <div class="title">
+    <span>VM</span><br>Distributors
+  </div>
+</div>
+  
+  
+    <div class="panel">
+      <div class="card1">
+        <img src="../icon/admin.png">
+        <div class="title">Admin</div>
+      </div>
+      <div class="card2">
+          <a href="../users.html">
+          <img src="icon/users.png">
+          <div class="title">FSC</div>
+        </a>
+      </div>
+    </div>
+  
+
+<footer>
+  <div>Powered By<br><span>CodeRaavana</span></div>
+</footer>
+</body>
+
+<script  type="text/javascript" src="js/jquery.min.js"></script>
+<script>
+  document.addEventListener("deviceready", onDeviceReady, false);
+
+  function onDeviceReady(){      
+      checkConnection();
+  } 
+
+  function init()
+  {
+        document.addEventListener('deviceready', function() {
+        //  var exitApp = false, intval = setInterval(function (){exitApp = false;}, 3000);
+        document.addEventListener("backbutton",onBackKeyDown,!1)
+        function onBackKeyDown(a) {
+            a.preventDefault(),confirm("Are you sure you want to exit ?",onConfirm,"Confirmation","Yes,No")
+        }
+        function onConfirm(a) {
+            2!=a&&navigator.app.exitApp()
+        }            
+    }, false);
+  }
+    
+     
+
+
+function checkConnection() {
+        navigator.network.connection.type==Connection.NONE?window.plugins.toast.showLongBottom("It Seems No internet Connection. Please check connection and retry !",function(a) {
+              console.log("toast success: "+a)
+        }
+        ,function(a) {
+          alert("toast error: "+a)
+        }
+        ):
+        navigator.network.connection.type==Connection.CELL_2G&&window.plugins.toast.showLongBottom("It Seems low internet Connection !",function(a) {
+        console.log("toast success: "+a)
+        }
+        ,function(a) {
+          alert("toast error: "+a)
+        }
+      )
+}
+
+</script>
+</html>

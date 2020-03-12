@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../css/matstyle.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/home1.css" media="screen,projection">
+    <link rel="stylesheet" href="../css/my.min.css">
+    <script src="../cordova.js"></script>  
+    <style>
+     .sc
+     {
+      margin: 0 auto;
+      /* width: 92vw; */
+      padding-top: 0vh;
+     } 
+     .sc select {
+    border: none;
+    background: rgb(31, 111, 181);
+    color: #fff;
+    border-radius: 5vw;
+    width: auto;
+    padding: 3vh;
+    font-size: 15px;
+    }
+    </style>      
+</head>
+
+
+<body style="background: #fff;">
+<div class="loader"></div>
+<div class="head">
+  <div class="content">
+    <a href="home.html"><div class="left"><img src="../icon/left.png"></div></a>
+    <div class="middle">Cash In Hand</div>
+    <div class="right"><a href="logout.html"><img src="../icon/logout.png"></a></div>
+  </div>  
+</div>
+
+<div class="h">
+<form action="#" id="handed_form" method="POST">
+  <div class="hf">
+    <div>Amount In Hand</div>
+    <div>
+      <input type="number" name="amount" id="amount" min="0" placeholder="Amount" style="text-align:right;" />
+    </div>
+  </div>  
+    <input type="date" placeholder="Hand over to Vignesh on" name="paid_on" id="date">
+    <input type="hidden" name="user_id" id="user_id" />
+    <div class="sc">
+      <select name="paid_to" id="paid_to">
+        <option>Paid To</option>
+        <option value="Vignesh">Vignesh</option>
+        <option value="Bank">Bank</option>        
+      </select>
+    </div>
+  <button type="submit" class="b">Hand Over</button>
+</form>
+</div>
+<div class="title">History</div>
+<div class="hh">
+  <table>
+    <thead>
+      <th>S.No</th>
+      <th>Date</th>
+      <th>Paid By</th>
+      <th>Paid To</th>
+      <th>Amount</th>
+    </thead>
+    <tbody id="history">      
+    </tbody>
+  </table>
+</div>
+</body>
+<script  type="text/javascript" src="../js/jquery.min.js"></script>
+<script src="../js/getservices.js"></script>
+<script> 
+$(document).ready(function() {  
+        $(".loader").fadeOut("slow");          
+        var user_id=window.localStorage.getItem("uid");    
+        $("#user_id").val(user_id);                  
+        var type=window.localStorage.getItem("type");
+
+        if(type == "Admin")
+        {
+          $(".h").hide();
+        }
+        var service = getservice();
+        
+        var url = service+'cash_history_admin.php';
+
+        $.getJSON(url, function(field) {                         
+              $.each(field, function(i, history) {                   
+                $('#history').append('<tr><td>'+history.sno+'</td><td>'+history.date+'</td><td>'+history.paid_by+'</td><td>'+history.paidto+'</td><td>'+history.amount+'</td></tr>');            
+              });
+        });          
+  });    
+    
+$("#handed_form").submit(function(e) {
+    e.preventDefault();
+    var dataString = new FormData(this);
+    var service = getservice();
+    var uri = service+'cash_inhand_transfer.php';
+		 $.ajax({
+            type: 'POST',
+            url: uri,
+            data: dataString,
+            // dataType: "text",
+            crossDomain: true,
+            cache:false,
+            processData: false,
+            contentType: false,
+            success: function(data){
+            	var objData = jQuery.parseJSON(data);
+	            	if(objData['code'] == 0)
+	            	{
+	            		alert(objData['msg']);
+						      setTimeout(function()
+		              {
+		                location.reload();
+		              }, 1000); 
+                }
+                else
+                {
+                  alert(objData['msg']);
+                }
+              },
+    });	
+  });	
+</script>
+</html>
