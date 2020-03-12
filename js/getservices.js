@@ -1,5 +1,5 @@
 function getservice(){
-    return 'http://localhost/inhouse/';
-    //return 'http://coderaavana.in/cr_jio/';
+    //return 'http://localhost/inhouse/';
+    return 'http://coderaavana.in/cr_inhouse/';
    }
    
